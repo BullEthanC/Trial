@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+<body>
+  <h1>Hello <span id="clientName"></span> </h1>
+</body>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script>
+  var config = {
+    apiKey: "AIzaSyB5J9tz76zMckrTpxOWCTghBJ-rSkX5R7I",
+    authDomain: "guidance-48a92.firebaseapp.com",
+    databaseURL: "https://guidance-48a92.firebaseio.com",
+    projectId: "guidance-48a92",
+    storageBucket: "guidance-48a92.appspot.com",
+    messagingSenderId: "741937370677"
+  };
+  firebase.initializeApp(config);
+
+  function login() {
+    function newLoginHappened(user) {
+      if (user) {
+        app(user);
+      } else {
+          var provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithRedirect(provider);
+      }
+    }
+
+    firebase.auth().onAuthStatChanged(newLoginHappened);
+  }
+
+  function app() {
+    document.getElementById("clientName").innerHTML = "there!";
+  }
+
+  window.onload = login;
+
+</script>
+</html>
